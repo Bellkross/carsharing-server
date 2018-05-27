@@ -1,10 +1,14 @@
 package com.bellkross.carsharingserver.entity
 
 import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
 
+@Entity
 class Client(
+        @Id
         @Column(name = "licence_number")
-        val licenseNumber: String,//PK
+        val licenseNumber: String,
         @Column(name = "full_name")
         val fullName: String,
         @Column(name = "credit_card_number")

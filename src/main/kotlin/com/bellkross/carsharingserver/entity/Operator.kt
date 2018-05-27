@@ -1,9 +1,13 @@
 package com.bellkross.carsharingserver.entity
 
 import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
 
-class Operator (
-        val id: String,//PK
+@Entity
+class Operator(
+        @Id
+        val id: String,
         @Column(name = "full_name")
         val fullName: String,
         val address: String,
