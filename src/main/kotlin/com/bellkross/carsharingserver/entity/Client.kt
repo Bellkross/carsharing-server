@@ -17,8 +17,6 @@ class Client(
         val address: String,
         @Column(name = "registration_date")
         val registrationDate: String,
-        @Column(name = "operator_id")
-        val operatorId: String,
         @Column(name = "phone_number")
         val phoneNumber: String
 )

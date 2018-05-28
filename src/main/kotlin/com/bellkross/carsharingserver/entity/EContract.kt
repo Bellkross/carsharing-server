@@ -1,7 +1,10 @@
 package com.bellkross.carsharingserver.entity
 
 import java.time.LocalDateTime
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.ManyToOne
 
 @Entity
 class EContract(
@@ -15,6 +18,7 @@ class EContract(
         val realDateTime: LocalDateTime?,
         @Column(name = "return_address")
         val returnAddress: String?,
+        val type: String,
         @ManyToOne
         val car: Car,
         @ManyToOne
