@@ -2,6 +2,7 @@ package com.bellkross.carsharingserver.controller
 
 import com.bellkross.carsharingserver.entity.Car
 import com.bellkross.carsharingserver.service.CarService
+import com.bellkross.carsharingserver.service.ClientService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
@@ -11,6 +12,9 @@ class CarsharingController {
 
     @Autowired
     lateinit var carService: CarService
+
+    @Autowired
+    lateinit var clientService: ClientService
 
     @GetMapping("/api/test")
     fun getTest() = "Hello world!"
@@ -30,5 +34,10 @@ class CarsharingController {
 
     @DeleteMapping("/api/cars/number={number}")
     fun deleteCar(@PathVariable("number") number: String) = carService.delete(carService.getById(number))
+
+    /** CLIENTS */
+
+    @GetMapping("/api/clients/getAllClients")
+    fun getAllClients() = clientService.getAll()
 
 }
