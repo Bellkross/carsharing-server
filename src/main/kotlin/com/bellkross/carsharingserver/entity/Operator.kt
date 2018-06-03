@@ -7,10 +7,10 @@ import javax.persistence.Id
 @Entity
 class Operator(
         @Id
-        val id: String,
+        val id: String = "",
         @Column(name = "full_name")
-        val fullName: String,
-        val address: String,
+        val fullName: String = "",
+        val address: String = "",
         @Column(name = "phone_number")
-        val phoneNumber: String
+        val phoneNumber: String = ""
 )

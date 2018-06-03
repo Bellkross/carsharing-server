@@ -8,14 +8,14 @@ import javax.persistence.Id
 @Entity
 class Insurance(
         @Id
-        val series: String,
+        val series: String = "",
         @Column(name = "creating_date")
-        val creatingDate: LocalDate,
+        val creatingDate: LocalDate = LocalDate.now(),
         @Column(name = "ending_date")
-        val endingDate: LocalDate,
-        val address: String,
+        val endingDate: LocalDate = LocalDate.now(),
+        val address: String = "",
         @Column(name = "identification_number")
-        val identificationNumber: String,
+        val identificationNumber: String = "",
         @Column(name = "company_name")
-        val companyName: String
+        val companyName: String = ""
 )

@@ -7,10 +7,10 @@ import javax.persistence.Id
 @Entity
 class Model(
         @Id
-        val name: String,
-        val brand: String,
-        val cost: Double,
+        val name: String = "",
+        val brand: String = "",
+        val cost: Double = 0.0,
         @Column(name = "waiting_cost")
-        val waitingCost: Double,
-        val type: String
+        val waitingCost: Double = 0.0,
+        val type: String = ""
 )

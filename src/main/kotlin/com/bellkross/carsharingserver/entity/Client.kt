@@ -8,15 +8,15 @@ import javax.persistence.Id
 class Client(
         @Id
         @Column(name = "licence_number")
-        val licenseNumber: String,
+        val licenseNumber: String = "",
         @Column(name = "full_name")
-        val fullName: String,
+        val fullName: String = "",
         @Column(name = "credit_card_number")
-        val creditCardNumber: String,
-        val birthday: String,
-        val address: String,
+        val creditCardNumber: String = "",
+        val birthday: String = "",
+        val address: String = "",
         @Column(name = "registration_date")
-        val registrationDate: String,
+        val registrationDate: String = "",
         @Column(name = "phone_number")
-        val phoneNumber: String
+        val phoneNumber: String = ""
 )

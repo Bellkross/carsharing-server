@@ -9,20 +9,20 @@ import javax.persistence.ManyToOne
 @Entity
 class EContract(
         @Id
-        val id: String,
+        val id: String = "",
         @Column(name = "start_datetime")
-        val startDateTime: LocalDateTime,
+        val startDateTime: LocalDateTime = LocalDateTime.now(),
         @Column(name = "end_datetime")
-        val endDateTime: LocalDateTime,
+        val endDateTime: LocalDateTime = LocalDateTime.now(),
         @Column(name = "real_datetime")
-        val realDateTime: LocalDateTime?,
+        val realDateTime: LocalDateTime? = LocalDateTime.now(),
         @Column(name = "return_address")
-        val returnAddress: String?,
-        val type: String,
+        val returnAddress: String? = "",
+        val type: String = "",
         @ManyToOne
-        val car: Car,
+        val car: Car = Car(),
         @ManyToOne
-        val client: Client,
+        val client: Client = Client(),
         @ManyToOne
-        val operator: Operator
+        val operator: Operator = Operator()
 )
