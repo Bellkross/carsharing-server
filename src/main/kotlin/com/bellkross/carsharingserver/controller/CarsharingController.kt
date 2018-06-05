@@ -32,7 +32,7 @@ class CarsharingController {
     @PutMapping("/api/cars")
     fun putCar(@Valid @RequestBody car: Car) : Car = carService.save(car)
 
-    @DeleteMapping("/api/cars/number={number}")
+    @DeleteMapping("/api/cars/car_number={number}")
     fun deleteCar(@PathVariable("number") number: String) = carService.delete(carService.getById(number))
 
     /** CLIENTS */
