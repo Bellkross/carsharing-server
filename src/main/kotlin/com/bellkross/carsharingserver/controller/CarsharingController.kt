@@ -38,13 +38,28 @@ class CarsharingController {
     fun getCar(@PathVariable("number") number: String) = carService.getById(number)
 
     @PostMapping("/api/cars")
-    fun postCar(@Valid @RequestBody car: Car): Car = carService.save(car)
+    fun postCar(@Valid @RequestBody car: Car) = carService.save(car)
 
     @PutMapping("/api/cars")
-    fun putCar(@Valid @RequestBody car: Car): Car = carService.save(car)
+    fun putCar(@Valid @RequestBody car: Car) = carService.save(car)
 
     @DeleteMapping("/api/cars/car_number={number}")
     fun deleteCar(@PathVariable("number") number: String) = carService.delete(carService.getById(number))
+
+    @GetMapping("/api/cars/address={address}")
+    fun getCarsByAddress(@PathVariable(value = "address") address: String) = carService.getCarsByAddress(address)
+
+    @GetMapping("/api/cars/model_name={model_name}")
+    fun getCarsByModel(@PathVariable(value = "model_name") modelName: String) = carService.getCarsByModel(modelName)
+
+    @GetMapping("/api/cars/series={series}")
+    fun getCarsByInsurance(@PathVariable(value = "series") series: String) = carService.getCarsByInsurance(series)
+
+    @GetMapping("/api/cars/color={color}")
+    fun getCarsByColor(@PathVariable(value = "color") color: String) = carService.getCarsByColor(color)
+
+    @GetMapping("/api/cars/licenceNumber={licence_number}")
+    fun getCarsOfClient(@PathVariable(value = "licence_number") licenceNumber: String) = carService.getCarsOfClient(licenceNumber)
 
     /** CLIENTS */
 
@@ -118,13 +133,17 @@ class CarsharingController {
     /** OPERATORS */
 
     @GetMapping("/api/operators/getAllOperators")
-    fun getAllOperators():MutableList<Operator> = operatorService.getAll()
+    fun getAllOperators(): MutableList<Operator> = operatorService.getAll()
+
     @GetMapping("/api/operators/operator_id={id}")
     fun getOperator(@PathVariable("id") id: String): Operator = operatorService.getById(id)
+
     @PostMapping("/api/operators")
     fun postOperator(@Valid @RequestBody operator: Operator): Operator = operatorService.save(operator)
+
     @PutMapping("/api/operators")
     fun putOperator(@Valid @RequestBody operator: Operator): Operator = operatorService.save(operator)
+
     @DeleteMapping("/api/operators/operator_id={id}")
     fun deleteOperator(@PathVariable("id") id: String) = operatorService.delete(operatorService.getById(id))
 }
