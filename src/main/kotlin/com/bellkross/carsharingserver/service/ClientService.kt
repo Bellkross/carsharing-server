@@ -1,8 +1,10 @@
 package com.bellkross.carsharingserver.service
 
+import com.bellkross.carsharingserver.entity.Car
 import com.bellkross.carsharingserver.entity.Client
 import com.bellkross.carsharingserver.repository.ClientRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
 
@@ -16,4 +18,7 @@ class ClientService {
     fun getById(licenseNumber: String): Client = repository.findById(licenseNumber).get()
     fun save(client: Client) : Client = repository.saveAndFlush(client)
     fun delete(client: Client) = repository.delete(client)
+
+    fun getClientsOfCar(carNumber: String) : List<Client> = repository.findClientsOfCar(carNumber)
+
 }

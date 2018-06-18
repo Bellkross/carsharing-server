@@ -69,6 +69,9 @@ class CarsharingController {
     @GetMapping("/api/clients/licenceNumber={number}")
     fun getClient(@PathVariable("number") number: String) = clientService.getById(number)
 
+    @GetMapping("/api/clients/car_number={car_number}")
+    fun getClientsOfCar(@PathVariable("car_number") carNumber: String) = clientService.getClientsOfCar(carNumber)
+
     @PostMapping("/api/clients")
     fun postClient(@Valid @RequestBody client: Client): Client = clientService.save(client)
 
