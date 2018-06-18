@@ -1,13 +1,7 @@
 package com.bellkross.carsharingserver.controller
 
-import com.bellkross.carsharingserver.entity.Car
-import com.bellkross.carsharingserver.entity.Client
-import com.bellkross.carsharingserver.entity.Insurance
-import com.bellkross.carsharingserver.entity.Model
-import com.bellkross.carsharingserver.service.CarService
-import com.bellkross.carsharingserver.service.ClientService
-import com.bellkross.carsharingserver.service.InsuranceService
-import com.bellkross.carsharingserver.service.ModelService
+import com.bellkross.carsharingserver.entity.*
+import com.bellkross.carsharingserver.service.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
@@ -26,6 +20,12 @@ class CarsharingController {
 
     @Autowired
     lateinit var insuranceService: InsuranceService
+
+    @Autowired
+    lateinit var contractService: EContractService
+
+    @Autowired
+    lateinit var operatorService: OperatorService
 
     @GetMapping("/api/test")
     fun getTest() = "Hello world!"
@@ -98,4 +98,33 @@ class CarsharingController {
     @DeleteMapping("/api/insurances/insurance_series={series}")
     fun deleteInsurance(@PathVariable("series") series: String) = insuranceService.delete(insuranceService.getById(series))
 
+    /** ECONTRACTS */
+
+    @GetMapping("/api/contracts/getAllContracts")
+    fun getAllContracts(): MutableList<EContract> = contractService.getAll()
+
+    @GetMapping("/api/contracts/contract_id={id}")
+    fun getContract(@PathVariable("id") id: String): EContract = contractService.getById(id)
+
+    @PostMapping("/api/contracts")
+    fun postContract(@Valid @RequestBody contract: EContract): EContract = contractService.save(contract)
+
+    @PutMapping("/api/contracts")
+    fun putContract(@Valid @RequestBody contract: EContract): EContract = contractService.save(contract)
+
+    @DeleteMapping("/api/contracts/contract_id={id}")
+    fun deleteContract(@PathVariable("id") id: String) = contractService.delete(contractService.getById(id))
+
+    /** OPERATORS */
+
+    @GetMapping("/api/operators/getAllOperators")
+    fun getAllOperators():MutableList<Operator> = operatorService.getAll()
+    @GetMapping("/api/operators/operator_id={id}")
+    fun getOperator(@PathVariable("id") id: String): Operator = operatorService.getById(id)
+    @PostMapping("/api/operators")
+    fun postOperator(@Valid @RequestBody operator: Operator): Operator = operatorService.save(operator)
+    @PutMapping("/api/operators")
+    fun putOperator(@Valid @RequestBody operator: Operator): Operator = operatorService.save(operator)
+    @DeleteMapping("/api/operators/operator_id={id}")
+    fun deleteOperator(@PathVariable("id") id: String) = operatorService.delete(operatorService.getById(id))
 }
