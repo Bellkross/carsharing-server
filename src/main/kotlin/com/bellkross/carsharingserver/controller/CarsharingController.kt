@@ -27,8 +27,7 @@ class CarsharingController {
     @Autowired
     lateinit var operatorService: OperatorService
 
-    @GetMapping("/api/test")
-    fun getTest() = "Hello world!"
+    //ADMINISTRATOR PART////////////////////////////////////////////////////////////////////////////////////////////////
 
     /** CARS */
     @GetMapping("/api/cars/getAllCars")
@@ -149,4 +148,8 @@ class CarsharingController {
 
     @DeleteMapping("/api/operators/operator_id={id}")
     fun deleteOperator(@PathVariable("id") id: String) = operatorService.delete(operatorService.getById(id))
+
+    //USER PART/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
 }

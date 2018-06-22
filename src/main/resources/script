@@ -12,8 +12,8 @@ VALUES ("car_number1", "fuel_card_number1", "current_address1", "green", 1, '200
 INSERT INTO OPERATOR (id, full_name, address, phone_number)
 VALUES ("operator1", "full_name", "address", "ophone_number1");
 
-INSERT INTO CLIENT (licence_number, full_name, address, phone_number)
-VALUES ("licence_number1", "full_name", "address", "phone_number1");
+INSERT INTO CLIENT (licence_number, full_name, address, phone_number, password)
+VALUES ("licence_number1", "full_name", "address", "phone_number1", "password");
 
 INSERT INTO ECONTRACT (id, start_datetime, end_datetime, real_datetime, return_address, type, car_number, client_licence_number, operator_id)
 VALUES ("econtract1", '2011-04-12 00:00:00', '2011-04-13 00:00:00',  '2011-04-13 00:00:00', "return_address1", "type1", "car_number1", "licence_number1", "operator1");
@@ -48,8 +48,8 @@ VALUES ("econtract3", '2011-04-14 00:00:00', '2011-04-15 00:00:00',  '2011-04-15
 INSERT INTO MODEL (name, brand, cost, waiting_cost, type)
 VALUES ("model_name2", "Subaru", 120, 12, "jeep");
 
-INSERT INTO CLIENT (licence_number, full_name, address, phone_number)
-VALUES ("licence_number2", "full_name", "address", "phone_number2");
+INSERT INTO CLIENT (licence_number, full_name, address, phone_number, password)
+VALUES ("licence_number2", "full_name", "address", "phone_number2", "password");
 
 INSERT INTO INSURANCE (series, creating_date, ending_date, address, identification_number, company_name)
 VALUES ("series4", '2007-03-01', '2020-03-02', "address1", "IN4", "company1");
@@ -70,8 +70,8 @@ VALUES ("econtract5", '2011-07-14 00:00:00', '2011-07-15 00:00:00',  '2011-07-15
 
 #6
 
-INSERT INTO CLIENT (licence_number, full_name, address, phone_number)
-VALUES ("licence_number3", "full_name", "address", "phone_number3");
+INSERT INTO CLIENT (licence_number, full_name, address, phone_number, password)
+VALUES ("licence_number3", "full_name", "address", "phone_number3", "password");
 
 INSERT INTO ECONTRACT (id, start_datetime, end_datetime, real_datetime, return_address, type, car_number, client_licence_number, operator_id)
 VALUES ("econtract6", '2011-08-09 00:00:00', '2011-08-10 00:00:00',  '2011-08-11 00:00:00', "return_address1", "type1", "car_number1", "licence_number3", "operator3");
@@ -82,14 +82,14 @@ VALUES ("econtract7", '2011-08-10 00:00:00', '2011-08-15 00:00:00',  '2011-08-15
 INSERT INTO ECONTRACT (id, start_datetime, end_datetime, real_datetime, return_address, type, car_number, client_licence_number, operator_id)
 VALUES ("econtract8", '2011-08-10 00:00:00', '2011-08-15 00:00:00',  '2011-08-15 00:00:00', "return_address1", "type1", "car_number2", "licence_number3", "operator1");
 
-INSERT INTO CLIENT (licence_number, full_name, address, phone_number)
-VALUES ("licence_number4", "full_name4", "address4", "phone_number4");
+INSERT INTO CLIENT (licence_number, full_name, address, phone_number, password)
+VALUES ("licence_number4", "full_name4", "address4", "phone_number4", "password");
 
 INSERT INTO ECONTRACT (id, start_datetime, end_datetime, real_datetime, return_address, type, car_number, client_licence_number, operator_id)
 VALUES ("econtract9", '2011-09-10 00:00:00', '2011-09-15 00:00:00',  '2011-09-15 00:00:00', "return_address5", "type1", "car_number1", "licence_number4", "operator3");
 
-INSERT INTO CLIENT (licence_number, full_name, address, phone_number)
-VALUES ("licence_number5", "full_name5", "address5", "phone_number5");
+INSERT INTO CLIENT (licence_number, full_name, address, phone_number, password)
+VALUES ("licence_number5", "full_name5", "address5", "phone_number5", "password");
 
 INSERT INTO ECONTRACT (id, start_datetime, end_datetime, real_datetime, return_address, type, car_number, client_licence_number, operator_id)
 VALUES ("econtract10", '2011-09-11 00:00:00', '2011-09-16 00:00:00',  '2011-09-17 00:00:00', "return_address5", "type1", "car_number1", "licence_number5", "operator3");
@@ -99,8 +99,8 @@ VALUES ("econtract10", '2011-09-11 00:00:00', '2011-09-16 00:00:00',  '2011-09-1
 INSERT INTO OPERATOR (id, full_name, address, phone_number)
 VALUES ("operator4", "full_nameOfOper", "addresss", "ophone_number4");
 
-INSERT INTO CLIENT (licence_number, full_name, address, phone_number)
-VALUES ("licence_number6", "full_name", "address", "phone_number6");
+INSERT INTO CLIENT (licence_number, full_name, address, phone_number, password)
+VALUES ("licence_number6", "full_name", "address", "phone_number6", "password");
 
 INSERT INTO ECONTRACT (id, start_datetime, end_datetime, real_datetime, return_address, type, car_number, client_licence_number, operator_id)
 VALUES ("econtract11", '2011-10-11 00:00:00', '2011-10-16 00:00:00',  '2011-10-17 00:00:00', "return_address1", "type1", "car_number4", "licence_number6", "operator4");

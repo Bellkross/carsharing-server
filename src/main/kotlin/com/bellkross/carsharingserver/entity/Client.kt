@@ -18,5 +18,7 @@ class Client(
         @Column(name = "registration_date")
         val registrationDate: String = "",
         @Column(name = "phone_number")
-        val phoneNumber: String = ""
+        val phoneNumber: String = "",
+        @Column(name = "password")
+        val password: String = ""
 )
