@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-class CarsharingController {
+class CarSharingController {
 
     @Autowired
     lateinit var carService: CarService
 
     @Autowired
     lateinit var clientService: ClientService
+
+    private val licenceNumberKey = "licenceNumber"
+    private val passwordKey = "password"
 
     @Autowired
     lateinit var modelService: ModelService
@@ -34,8 +37,7 @@ class CarsharingController {
 
     /** CARS */
     @GetMapping("/api/cars/getAllCars")
-    fun getAllCars() = ResponseEntity.ok(carService.getAll()
-    )
+    fun getAllCars() = ResponseEntity.ok(carService.getAll())
 
     @GetMapping("/api/cars/car_number={number}")
     fun getCar(@PathVariable("number") number: String) = ResponseEntity.ok(carService.getById(number))
@@ -60,9 +62,6 @@ class CarsharingController {
 
     @GetMapping("/api/cars/color={color}")
     fun getCarsByColor(@PathVariable(value = "color") color: String) = ResponseEntity.ok(carService.getCarsByColor(color))
-
-    @GetMapping("/api/cars/licenceNumber={licence_number}")
-    fun getCarsOfClient(@PathVariable(value = "licence_number") licenceNumber: String) = ResponseEntity.ok(carService.getCarsOfClient(licenceNumber))
 
     /** CLIENTS */
 
@@ -160,19 +159,16 @@ class CarsharingController {
 
     //USER PART/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*
-     MD5 hex of word password -> 286755fad04869ca523320acce0dc6a4
-     */
-    @GetMapping("/api/clients/authorization")
-    fun authorization(@RequestHeader("Authorization") authorization: String): ResponseEntity<Boolean> {
-        val params: Map<String, String> = getAuthorizationParams(authorization)
-        val clientOptional = clientService.getById(params["licenceNumber"].toString())
+    /** Authorization part */
+    @GetMapping("/api/client/authorization")
+    fun authorization(@RequestHeader("Authorization") authorization: String) {
+        val params = getAuthorizationParams(authorization)
+        params.let {
+            if (it.containsKey(licenceNumberKey) && it.containsKey(passwordKey)) {
 
-        return if (clientOptional.isPresent)
-            ResponseEntity.ok(DigestUtils.md5Hex(clientOptional.get().password) ==
-                    params["password"].toString())
-        else
-            ResponseEntity.status(HttpStatus.NOT_FOUND).body(false)
+            }
+        }
+        ResponseEntity.ok(clientAuthentication(params))
     }
 
     private fun getAuthorizationParams(authorization: String): Map<String, String> {
@@ -182,6 +178,30 @@ class CarsharingController {
         result[licenceNumberPart[0]] = licenceNumberPart[1]
         result[passwordPart[0]] = passwordPart[1]
         return result
+    }
+
+    private fun clientAuthentication(params: Map<String, String>): Boolean =
+            clientService.getById(params[licenceNumberKey]!!).let {
+                return it.isPresent && (DigestUtils.md5Hex(it.get().password) == params[passwordKey]!!)
+            }
+
+    /** Requests part */
+    @GetMapping("/api/cars/getRecentCars")
+    fun getCarsOfClient(@RequestHeader("Authorization") authorization: String): ResponseEntity<List<Car>> {
+        val params = getAuthorizationParams(authorization)
+        return if (clientAuthentication(params))
+            ResponseEntity.ok(carService.getCarsOfClient(params[licenceNumberKey]!!))
+        else
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
+    }
+
+    @GetMapping("/api/client/getAvailableCars")
+    fun getCarsForClient(@RequestHeader("Authorization") authorization: String): ResponseEntity<List<Car>> {
+        val params = getAuthorizationParams(authorization)
+        return if (clientAuthentication(params))
+            ResponseEntity.ok(carService.getCarsForClient())
+        else
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
     }
 
 }

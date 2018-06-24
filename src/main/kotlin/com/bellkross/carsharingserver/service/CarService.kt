@@ -26,4 +26,6 @@ class CarService {
 
     fun getCarsOfClient(licenceNumber: String): List<Car> = repository.findCarsOfClient(licenceNumber)
 
+    fun getCarsForClient(): List<Car> = repository.findCarsForClient()
+
 }
