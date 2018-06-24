@@ -1,6 +1,7 @@
 package com.bellkross.carsharingserver.service
 
 import com.bellkross.carsharingserver.entity.Car
+import com.bellkross.carsharingserver.entity.dto.CarDTO
 import com.bellkross.carsharingserver.repository.CarRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -26,6 +27,9 @@ class CarService {
 
     fun getCarsOfClient(licenceNumber: String): List<Car> = repository.findCarsOfClient(licenceNumber)
 
-    fun getCarsForClient(): List<Car> = repository.findCarsForClient()
+    fun getCarsForClient(): List<CarDTO> =
+            repository.findCarsForClient().map { car ->
+                CarDTO(car)
+            }
 
 }

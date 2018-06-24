@@ -46,7 +46,7 @@ interface CarRepository : JpaRepository<Car, String> {
             nativeQuery = true)
     fun findCarsOfClient(@Param("licenceNumber") licenceNumber: String): List<Car>
 
-    @Query(value = "SELECT * " +
+    @Query(value = "SELECT car.* " +
             "FROM car car " +
             "WHERE car.status = true",
             nativeQuery = true)

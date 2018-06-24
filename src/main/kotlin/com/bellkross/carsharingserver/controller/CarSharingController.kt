@@ -1,6 +1,7 @@
 package com.bellkross.carsharingserver.controller
 
 import com.bellkross.carsharingserver.entity.*
+import com.bellkross.carsharingserver.entity.dto.CarDTO
 import com.bellkross.carsharingserver.service.*
 import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.beans.factory.annotation.Autowired
@@ -196,8 +197,9 @@ class CarSharingController {
     }
 
     @GetMapping("/api/client/getAvailableCars")
-    fun getCarsForClient(@RequestHeader("Authorization") authorization: String): ResponseEntity<List<Car>> {
+    fun getCarsForClient(@RequestHeader("Authorization") authorization: String): ResponseEntity<List<CarDTO>> {
         val params = getAuthorizationParams(authorization)
+        //return if (clientAuthentication(params))
         return if (clientAuthentication(params))
             ResponseEntity.ok(carService.getCarsForClient())
         else
