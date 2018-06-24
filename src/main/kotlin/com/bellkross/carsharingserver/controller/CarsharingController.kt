@@ -164,13 +164,24 @@ class CarsharingController {
      MD5 hex of word password -> 286755fad04869ca523320acce0dc6a4
      */
     @GetMapping("/api/clients/authorization")
-    fun authorization(@RequestHeader("licenceNumber") licenceNumber: String,
-                      @RequestHeader("password") password: String): ResponseEntity<Boolean> {
-        val clientOptional = clientService.getById(licenceNumber)
+    fun authorization(@RequestHeader("Authorization") authorization: String): ResponseEntity<Boolean> {
+        val params: Map<String, String> = getAuthorizationParams(authorization)
+        val clientOptional = clientService.getById(params["licenceNumber"].toString())
+
         return if (clientOptional.isPresent)
-            ResponseEntity.ok(DigestUtils.md5Hex(clientOptional.get().password) == password)
+            ResponseEntity.ok(DigestUtils.md5Hex(clientOptional.get().password) ==
+                    params["password"].toString())
         else
             ResponseEntity.status(HttpStatus.NOT_FOUND).body(false)
+    }
+
+    private fun getAuthorizationParams(authorization: String): Map<String, String> {
+        val result: HashMap<String, String> = HashMap()
+        val licenceNumberPart = authorization.split(", ")[0].split("=")
+        val passwordPart = authorization.split(", ")[1].split("=")
+        result[licenceNumberPart[0]] = licenceNumberPart[1]
+        result[passwordPart[0]] = passwordPart[1]
+        return result
     }
 
 }

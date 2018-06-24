@@ -15,9 +15,9 @@ class EContract(
         @Column(name = "end_datetime")
         val endDateTime: LocalDateTime = LocalDateTime.now(),
         @Column(name = "real_datetime")
-        val realDateTime: LocalDateTime? = LocalDateTime.now(),
+        val realDateTime: LocalDateTime? = null,
         @Column(name = "return_address")
-        val returnAddress: String? = "",
+        val returnAddress: String? = null,
         val type: String = "",
         @ManyToOne
         val car: Car = Car(),
