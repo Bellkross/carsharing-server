@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class ClientService {
@@ -15,7 +16,7 @@ class ClientService {
     private lateinit var repository: ClientRepository
 
     fun getAll(): MutableList<Client> = repository.findAll()
-    fun getById(licenseNumber: String): Client = repository.findById(licenseNumber).get()
+    fun getById(licenseNumber: String): Optional<Client> = repository.findById(licenseNumber)
     fun save(client: Client) : Client = repository.saveAndFlush(client)
     fun delete(client: Client) = repository.delete(client)
 

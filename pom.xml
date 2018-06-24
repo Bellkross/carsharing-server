@@ -26,6 +26,12 @@
     </properties>
 
     <dependencies>
+        <!-- MD 5 -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.4</version>
+        </dependency>
         <!-- coroutines -->
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
@@ -46,9 +52,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>8.0.11</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.11</version>
         </dependency>
 
         <dependency>

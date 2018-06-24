@@ -2,7 +2,10 @@ package com.bellkross.carsharingserver.controller
 
 import com.bellkross.carsharingserver.entity.*
 import com.bellkross.carsharingserver.service.*
+import org.apache.commons.codec.digest.DigestUtils
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -31,69 +34,72 @@ class CarsharingController {
 
     /** CARS */
     @GetMapping("/api/cars/getAllCars")
-    fun getAllCars() = carService.getAll()
+    fun getAllCars() = ResponseEntity.ok(carService.getAll()
+    )
 
     @GetMapping("/api/cars/car_number={number}")
-    fun getCar(@PathVariable("number") number: String) = carService.getById(number)
+    fun getCar(@PathVariable("number") number: String) = ResponseEntity.ok(carService.getById(number))
 
     @PostMapping("/api/cars")
-    fun postCar(@Valid @RequestBody car: Car) = carService.save(car)
+    fun postCar(@Valid @RequestBody car: Car) = ResponseEntity.ok(carService.save(car))
 
     @PutMapping("/api/cars")
-    fun putCar(@Valid @RequestBody car: Car) = carService.save(car)
+    fun putCar(@Valid @RequestBody car: Car) = ResponseEntity.ok(carService.save(car))
 
     @DeleteMapping("/api/cars/car_number={number}")
-    fun deleteCar(@PathVariable("number") number: String) = carService.delete(carService.getById(number))
+    fun deleteCar(@PathVariable("number") number: String) = ResponseEntity.ok(carService.delete(carService.getById(number)))
 
     @GetMapping("/api/cars/address={address}")
-    fun getCarsByAddress(@PathVariable(value = "address") address: String) = carService.getCarsByAddress(address)
+    fun getCarsByAddress(@PathVariable(value = "address") address: String) = ResponseEntity.ok(carService.getCarsByAddress(address))
 
     @GetMapping("/api/cars/model_name={model_name}")
-    fun getCarsByModel(@PathVariable(value = "model_name") modelName: String) = carService.getCarsByModel(modelName)
+    fun getCarsByModel(@PathVariable(value = "model_name") modelName: String) = ResponseEntity.ok(carService.getCarsByModel(modelName))
 
     @GetMapping("/api/cars/series={series}")
-    fun getCarsByInsurance(@PathVariable(value = "series") series: String) = carService.getCarsByInsurance(series)
+    fun getCarsByInsurance(@PathVariable(value = "series") series: String) = ResponseEntity.ok(carService.getCarsByInsurance(series))
 
     @GetMapping("/api/cars/color={color}")
-    fun getCarsByColor(@PathVariable(value = "color") color: String) = carService.getCarsByColor(color)
+    fun getCarsByColor(@PathVariable(value = "color") color: String) = ResponseEntity.ok(carService.getCarsByColor(color))
 
     @GetMapping("/api/cars/licenceNumber={licence_number}")
-    fun getCarsOfClient(@PathVariable(value = "licence_number") licenceNumber: String) = carService.getCarsOfClient(licenceNumber)
+    fun getCarsOfClient(@PathVariable(value = "licence_number") licenceNumber: String) = ResponseEntity.ok(carService.getCarsOfClient(licenceNumber))
 
     /** CLIENTS */
 
     @GetMapping("/api/clients/getAllClients")
-    fun getAllClients() = clientService.getAll()
+    fun getAllClients() = ResponseEntity.ok(clientService.getAll()
+    )
 
     @GetMapping("/api/clients/licenceNumber={number}")
-    fun getClient(@PathVariable("number") number: String) = clientService.getById(number)
+    fun getClient(@PathVariable("number") number: String) = ResponseEntity.ok(clientService.getById(number).get())
 
     @GetMapping("/api/clients/car_number={car_number}")
-    fun getClientsOfCar(@PathVariable("car_number") carNumber: String) = clientService.getClientsOfCar(carNumber)
+    fun getClientsOfCar(@PathVariable("car_number") carNumber: String) = ResponseEntity.ok(clientService.getClientsOfCar(carNumber))
 
     @PostMapping("/api/clients")
-    fun postClient(@Valid @RequestBody client: Client): Client = clientService.save(client)
+    fun postClient(@Valid @RequestBody client: Client) = ResponseEntity.ok(clientService.save(client))
 
     @PutMapping("/api/clients")
-    fun putClient(@Valid @RequestBody client: Client): Client = clientService.save(client)
+    fun putClient(@Valid @RequestBody client: Client) = ResponseEntity.ok(clientService.save(client))
 
     @DeleteMapping("/api/clients/licenceNumber={number}")
-    fun deleteClient(@PathVariable("number") number: String) = clientService.delete(clientService.getById(number))
+    fun deleteClient(@PathVariable("number") number: String) = clientService.delete(clientService.getById(number).get())
 
 
     /** MODELS */
 
     @GetMapping("/api/models/getAllModels")
-    fun getAllModels(): MutableList<Model> = modelService.getAll()
+    fun getAllModels() = ResponseEntity.ok(modelService.getAll()
+    )
 
     @GetMapping("/api/models/model_name={name}")
-    fun getModel(@PathVariable("name") name: String) = modelService.getById(name)
+    fun getModel(@PathVariable("name") name: String) = ResponseEntity.ok(modelService.getById(name))
 
     @PostMapping("/api/models")
-    fun postModel(@Valid @RequestBody model: Model): Model = modelService.save(model)
+    fun postModel(@Valid @RequestBody model: Model) = ResponseEntity.ok(modelService.save(model))
 
     @PutMapping("/api/models")
-    fun putModel(@Valid @RequestBody model: Model): Model = modelService.save(model)
+    fun putModel(@Valid @RequestBody model: Model) = ResponseEntity.ok(modelService.save(model))
 
     @DeleteMapping("/api/models/model_name={name}")
     fun deleteModel(@PathVariable("name") name: String) = modelService.delete(modelService.getById(name))
@@ -101,16 +107,17 @@ class CarsharingController {
     /** INSURANCES */
 
     @GetMapping("/api/insurances/getAllInsurances")
-    fun getAllInsurances(): MutableList<Insurance> = insuranceService.getAll()
+    fun getAllInsurances() = ResponseEntity.ok(insuranceService.getAll()
+    )
 
     @GetMapping("/api/insurances/insurance_series={series}")
-    fun getInsurance(@PathVariable("series") series: String) = insuranceService.getById(series)
+    fun getInsurance(@PathVariable("series") series: String) = ResponseEntity.ok(insuranceService.getById(series))
 
     @PostMapping("/api/insurances")
-    fun postInsurance(@Valid @RequestBody insurance: Insurance): Insurance = insuranceService.save(insurance)
+    fun postInsurance(@Valid @RequestBody insurance: Insurance) = ResponseEntity.ok(insuranceService.save(insurance))
 
     @PutMapping("/api/insurances")
-    fun putInsurance(@Valid @RequestBody insurance: Insurance): Insurance = insuranceService.save(insurance)
+    fun putInsurance(@Valid @RequestBody insurance: Insurance) = ResponseEntity.ok(insuranceService.save(insurance))
 
     @DeleteMapping("/api/insurances/insurance_series={series}")
     fun deleteInsurance(@PathVariable("series") series: String) = insuranceService.delete(insuranceService.getById(series))
@@ -118,16 +125,17 @@ class CarsharingController {
     /** ECONTRACTS */
 
     @GetMapping("/api/contracts/getAllContracts")
-    fun getAllContracts(): MutableList<EContract> = contractService.getAll()
+    fun getAllContracts() = ResponseEntity.ok(contractService.getAll()
+    )
 
     @GetMapping("/api/contracts/contract_id={id}")
-    fun getContract(@PathVariable("id") id: String): EContract = contractService.getById(id)
+    fun getContract(@PathVariable("id") id: String) = ResponseEntity.ok(contractService.getById(id))
 
     @PostMapping("/api/contracts")
-    fun postContract(@Valid @RequestBody contract: EContract): EContract = contractService.save(contract)
+    fun postContract(@Valid @RequestBody contract: EContract) = ResponseEntity.ok(contractService.save(contract))
 
     @PutMapping("/api/contracts")
-    fun putContract(@Valid @RequestBody contract: EContract): EContract = contractService.save(contract)
+    fun putContract(@Valid @RequestBody contract: EContract) = ResponseEntity.ok(contractService.save(contract))
 
     @DeleteMapping("/api/contracts/contract_id={id}")
     fun deleteContract(@PathVariable("id") id: String) = contractService.delete(contractService.getById(id))
@@ -135,21 +143,34 @@ class CarsharingController {
     /** OPERATORS */
 
     @GetMapping("/api/operators/getAllOperators")
-    fun getAllOperators(): MutableList<Operator> = operatorService.getAll()
+    fun getAllOperators() = ResponseEntity.ok(operatorService.getAll()
+    )
 
     @GetMapping("/api/operators/operator_id={id}")
-    fun getOperator(@PathVariable("id") id: String): Operator = operatorService.getById(id)
+    fun getOperator(@PathVariable("id") id: String) = ResponseEntity.ok(operatorService.getById(id))
 
     @PostMapping("/api/operators")
-    fun postOperator(@Valid @RequestBody operator: Operator): Operator = operatorService.save(operator)
+    fun postOperator(@Valid @RequestBody operator: Operator) = ResponseEntity.ok(operatorService.save(operator))
 
     @PutMapping("/api/operators")
-    fun putOperator(@Valid @RequestBody operator: Operator): Operator = operatorService.save(operator)
+    fun putOperator(@Valid @RequestBody operator: Operator) = ResponseEntity.ok(operatorService.save(operator))
 
     @DeleteMapping("/api/operators/operator_id={id}")
     fun deleteOperator(@PathVariable("id") id: String) = operatorService.delete(operatorService.getById(id))
 
     //USER PART/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
+    /*
+     MD5 hex of word password -> 286755fad04869ca523320acce0dc6a4
+     */
+    @GetMapping("/api/clients/authorization")
+    fun authorization(@RequestHeader("licenceNumber") licenceNumber: String,
+                      @RequestHeader("password") password: String): ResponseEntity<Boolean> {
+        val clientOptional = clientService.getById(licenceNumber)
+        return if (clientOptional.isPresent)
+            ResponseEntity.ok(DigestUtils.md5Hex(clientOptional.get().password) == password)
+        else
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body(false)
+    }
+
 }
