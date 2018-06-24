@@ -199,7 +199,6 @@ class CarSharingController {
     @GetMapping("/api/client/getAvailableCars")
     fun getCarsForClient(@RequestHeader("Authorization") authorization: String): ResponseEntity<List<CarDTO>> {
         val params = getAuthorizationParams(authorization)
-        //return if (clientAuthentication(params))
         return if (clientAuthentication(params))
             ResponseEntity.ok(carService.getCarsForClient())
         else
